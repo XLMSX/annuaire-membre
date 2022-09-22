@@ -14,7 +14,10 @@ if (isset($_REQUEST['action'])) {
 
 if (isset($_REQUEST['uc'])) {
     $uc=$_REQUEST['uc'];
-}
+} 
+
+
+
 include "controllers/c_$uc.php";
 
 

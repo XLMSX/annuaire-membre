@@ -44,7 +44,7 @@ class PdoBridge
     public function getLesMembres()
     {
         // modifiez la requête sql
-        $sql = 'SELECT id FROM membres';
+        $sql = 'SELECT id, prenom, nom FROM membres';
         $lesLignes = PdoBridge::$monPdo->query($sql);
         return $lesLignes->fetchALL(PDO::FETCH_ASSOC);
     }
@@ -52,7 +52,7 @@ class PdoBridge
     public function getMaxId()
     {
         // modifiez la requête sql
-        $req = "SELECT id AS maxi FROM membres";
+        $req = "SELECT MAX(id) AS maxi FROM membres";
         $res = PdoBridge::$monPdo->query($req);
         $lesLignes = $res->fetch();
         return 1 + intval($lesLignes["maxi"]);
@@ -63,7 +63,7 @@ class PdoBridge
         // modifiez la requête sql
         $id = $this->getMaxId();
         // modifiez la requête sql
-        $sql = 'INSERT INTO membres Value($id)';
+        $sql = "INSERT INTO membres VALUE ('$id', '$prenom', '$nom')";
         $req = PdoBridge::$monPdo->exec($sql);
     }
 }
